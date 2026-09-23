@@ -8,6 +8,7 @@ func assertBackwardsCompatibleCodable<A>(
   json: Any,
   decoder: JSONDecoder = decoder,
   encoder: JSONEncoder = encoder,
+  fileID: StaticString = #fileID,
   file: StaticString = #filePath,
   line: UInt = #line
 ) throws where A: Codable & Equatable {
@@ -19,7 +20,8 @@ func assertBackwardsCompatibleCodable<A>(
     value,
     decodedValue,
     "Value decoded from JSON does not match expected value",
-    file: file,
+    fileID: fileID,
+    filePath: file,
     line: line
   )
 

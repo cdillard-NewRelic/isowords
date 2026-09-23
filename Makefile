@@ -162,7 +162,7 @@ words-import:
 ifdef PRIVATE
 	@curl -o $(DICTIONARY_GZIP) $(DICTIONARY_URL)
 else
-	@echo -e "CUBES\nREMOVES" \
+	@printf 'CUBES\nREMOVE\nREMOVES\n' \
 		| cat - /usr/share/dict/words \
 		| tr a-z A-Z \
 		| sort -u \

@@ -27,17 +27,20 @@ var package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-crypto", from: "1.1.6"),
-    .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.1.0"),
-    .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.12.0"),
-    .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.3.3"),
-    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.0"),
+    .package(url: "https://github.com/pointfreeco/swift-case-paths", from: "1.10.0"),
+    // NB: Floor required so the whole graph agrees on the renamed
+    //     `swift-issue-reporting` package (was `xctest-dynamic-overlay`).
+    .package(url: "https://github.com/pointfreeco/swift-clocks", from: "1.1.0"),
+    .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.26.0"),
+    .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.7.3"),
+    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.11.0"),
     .package(url: "https://github.com/pointfreeco/swift-gen", from: "0.3.0"),
     .package(url: "https://github.com/pointfreeco/swift-parsing", from: "0.12.0"),
     .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.6.0"),
-    .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.2.0"),
+    .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.7.0"),
     .package(url: "https://github.com/pointfreeco/swift-overture", from: "0.5.0"),
-    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.10.0"),
-    .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.2.3"),
+    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.19.0"),
+    .package(url: "https://github.com/pointfreeco/swift-issue-reporting", from: "2.1.0"),
   ],
   targets: [
     .target(
@@ -46,7 +49,7 @@ var package = Package(
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
         .product(name: "Tagged", package: "swift-tagged"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .systemLibrary(
@@ -62,7 +65,7 @@ var package = Package(
         "SharedModels",
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
@@ -121,7 +124,7 @@ var package = Package(
         .product(name: "Tagged", package: "swift-tagged"),
         .product(name: "Parsing", package: "swift-parsing"),
         .product(name: "URLRouting", package: "swift-url-routing"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .testTarget(
@@ -258,7 +261,7 @@ if ProcessInfo.processInfo.environment["TEST_SERVER"] == nil {
         .product(name: "CasePaths", package: "swift-case-paths"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
@@ -317,7 +320,7 @@ if ProcessInfo.processInfo.environment["TEST_SERVER"] == nil {
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
         .product(name: "Gen", package: "swift-gen"),
         .product(name: "Tagged", package: "swift-tagged"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .testTarget(
@@ -344,7 +347,7 @@ if ProcessInfo.processInfo.environment["TEST_SERVER"] == nil {
       name: "AudioPlayerClient",
       dependencies: [
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
@@ -413,21 +416,21 @@ if ProcessInfo.processInfo.environment["TEST_SERVER"] == nil {
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
         .product(name: "Overture", package: "swift-overture"),
         .product(name: "Tagged", package: "swift-tagged"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
       name: "ComposableStoreKit",
       dependencies: [
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
       name: "ComposableUserNotifications",
       dependencies: [
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
@@ -531,7 +534,7 @@ if ProcessInfo.processInfo.environment["TEST_SERVER"] == nil {
       dependencies: [
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
@@ -554,7 +557,7 @@ if ProcessInfo.processInfo.environment["TEST_SERVER"] == nil {
       dependencies: [
         "XCTestDebugSupport",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
@@ -563,7 +566,7 @@ if ProcessInfo.processInfo.environment["TEST_SERVER"] == nil {
         "ClientModels",
         "XCTestDebugSupport",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
@@ -819,7 +822,7 @@ if ProcessInfo.processInfo.environment["TEST_SERVER"] == nil {
       name: "RemoteNotificationsClient",
       dependencies: [
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
@@ -827,7 +830,7 @@ if ProcessInfo.processInfo.environment["TEST_SERVER"] == nil {
       dependencies: [
         "ServerConfig",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
@@ -851,7 +854,7 @@ if ProcessInfo.processInfo.environment["TEST_SERVER"] == nil {
         "UserDefaultsClient",
         "UserSettingsClient",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ],
       resources: [.process("Resources/")]
     ),
@@ -966,7 +969,7 @@ if ProcessInfo.processInfo.environment["TEST_SERVER"] == nil {
       name: "UserDefaultsClient",
       dependencies: [
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+        .product(name: "IssueReporting", package: "swift-issue-reporting"),
       ]
     ),
     .target(
@@ -1085,7 +1088,7 @@ package.targets.append(contentsOf: [
       "SharedModels",
       "SnsClient",
       .product(name: "Either", package: "swift-prelude"),
-      .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+      .product(name: "IssueReporting", package: "swift-issue-reporting"),
     ]
   ),
   .target(
@@ -1268,7 +1271,7 @@ package.targets.append(contentsOf: [
     name: "ServerTestHelpers",
     dependencies: [
       .product(name: "Either", package: "swift-prelude"),
-      .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+      .product(name: "IssueReporting", package: "swift-issue-reporting"),
     ]
   ),
   .target(
@@ -1336,7 +1339,7 @@ package.targets.append(contentsOf: [
       "ServerTestHelpers",
       .product(name: "Either", package: "swift-prelude"),
       .product(name: "Tagged", package: "swift-tagged"),
-      .product(name: "IssueReporting", package: "xctest-dynamic-overlay"),
+      .product(name: "IssueReporting", package: "swift-issue-reporting"),
     ]
   ),
   .testTarget(

@@ -11,6 +11,7 @@ import ServerConfigClient
 import Styleguide
 import SwiftUI
 import UIApplicationClient
+import NewRelic
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
   let store = Store(
@@ -33,6 +34,10 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
   ) -> Bool {
+    NRLogger.setLogLevels(NRLogLevelDebug.rawValue)
+
+    NewRelic.start(withApplicationToken:"AA11c06677755410537dfa075c99964a3c28b86fee-NRMA",andCollectorAddress: "staging-mobile-collector.newrelic.com", andCrashCollectorAddress: "staging-mobile-crash.newrelic.com")
+
     self.store.send(.appDelegate(.didFinishLaunching))
     return true
   }
